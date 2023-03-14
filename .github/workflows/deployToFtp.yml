@@ -25,4 +25,5 @@ jobs:
         username: ftp_usr
         password: ${{ secrets.FTP_SERVER_PASSWORD }}
         port: 69
-        server-dir: ./angular
+        server-dir: ./angular/
+        local-dir: ./src/indoe-navi-control/
