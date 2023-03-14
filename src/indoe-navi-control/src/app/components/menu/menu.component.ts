@@ -1,25 +1,26 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit  } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent {
-  constructor(private router: Router) {}
+export class MenuComponent implements OnInit {
+  constructor(private location: Location) {}
 
   menuItems : any[] = [
     { name: "Statistik", url: "/statistic", isSelected: false },
     { name: "SPE'er", url: "/spes",isSelected: false },
     { name: "Ruter", url: "/routes",isSelected: false },
     { name: "Kort indstillinger", url: "/map-settings",isSelected: false },
+    { name: "Vælg anden lokation", url: "/locations",isSelected: false },
+    { name: "Log ud", url: "/login",isSelected: false },
   ];
 
   ngOnInit(): void {
     for (let menuItem of this.menuItems){
-    console.log(this.router.url + " = " + menuItem.url);
-      if (menuItem.url == this.router.url){
+      if (menuItem.url == this.location.path()){
         menuItem.isSelected = true;
       }
     }

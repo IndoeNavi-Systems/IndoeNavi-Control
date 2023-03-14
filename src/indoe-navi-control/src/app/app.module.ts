@@ -6,18 +6,22 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { StatisticComponent } from './components/statistic/statistic.component';
-import { ESPComponent } from './components/esp/esp.component';
 import { RoutesComponent } from './components/routes/routes.component';
 import { MapSettingsComponent } from './components/map-settings/map-settings.component';
 import { MapComponent } from './components/map/map.component';
+import { SpesComponent } from './components/spes/spes.component';
+import { LoginComponent } from './components/login/login.component';
+import { LocationsComponent } from './components/locations/locations.component';
 
 const appRoutes: Routes = [
   { path: 'statistic', component: StatisticComponent },
-  { path: 'spes', component: ESPComponent },
+  { path: 'spes', component: SpesComponent },
   { path: 'routes', component: RoutesComponent },
   { path: 'map-settings', component: MapSettingsComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'locations', component: LocationsComponent },
   { path: '**',
-    redirectTo: '/statistic',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
 ];
@@ -28,10 +32,12 @@ const appRoutes: Routes = [
     AppComponent,
     MenuComponent,
     StatisticComponent,
-    ESPComponent,
     RoutesComponent,
     MapSettingsComponent,
-    MapComponent
+    MapComponent,
+    SpesComponent,
+    LoginComponent,
+    LocationsComponent
   ],
   imports: [
     RouterModule.forRoot(
