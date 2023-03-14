@@ -6,5 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./routes.component.css']
 })
 export class RoutesComponent {
-
 }

@@ -9,6 +9,7 @@ import { StatisticComponent } from './components/statistic/statistic.component';
 import { ESPComponent } from './components/esp/esp.component';
 import { RoutesComponent } from './components/routes/routes.component';
 import { MapSettingsComponent } from './components/map-settings/map-settings.component';
+import { MapComponent } from './components/map/map.component';
 
 const appRoutes: Routes = [
   { path: 'statistic', component: StatisticComponent },
@@ -29,7 +30,8 @@ const appRoutes: Routes = [
     StatisticComponent,
     ESPComponent,
     RoutesComponent,
-    MapSettingsComponent
+    MapSettingsComponent,
+    MapComponent
   ],
   imports: [
     RouterModule.forRoot(
