@@ -1,3 +1,28 @@
-<div class="container-fluid">
-  <h1>Statistik</h1>
+<div class="container">
+  <h1 class="text-center mt-4 title">Statistik</h1>
+  <div class="row g-5 mt-4">
+    <div *ngFor="let chart of charts" class="col-6">
+      <div class="card mb-3" style="height: 400px;">
+        <h3 class="card-header text-center">{{chart.title}}</h3>
+        <div *ngIf="chart.isEChart" echarts [options]="chart.getOptions()" class="demo-chart"></div>
+        <div *ngIf="!chart.isEChart">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th *ngFor="let header of chart.getOptions().headers" scope="col">{{header}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of chart.getOptions().rows">
+                <td *ngFor="let value of row.values">{{value}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer text-muted mt-auto">
+          Sidst opdateret x min siden
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

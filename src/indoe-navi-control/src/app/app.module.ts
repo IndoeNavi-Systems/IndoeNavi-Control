@@ -12,6 +12,7 @@ import { MapComponent } from './components/map/map.component';
 import { SpesComponent } from './components/spes/spes.component';
 import { LoginComponent } from './components/login/login.component';
 import { LocationsComponent } from './components/locations/locations.component';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 const appRoutes: Routes = [
   { path: 'statistic', component: StatisticComponent },
@@ -46,7 +47,10 @@ const appRoutes: Routes = [
     ),
     RouterModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
