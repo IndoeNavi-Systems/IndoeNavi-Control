@@ -2,8 +2,8 @@
   <h1 class="text-center mt-4 title">Statistik</h1>
   <div class="row g-5 mt-4">
     <div *ngFor="let chart of charts" class="col-6">
-      <div class="card mb-3" style="height: 400px;">
-        <h3 class="card-header text-center">{{chart.title}}</h3>
+      <div class="card mb-3 card-borders" style="height: 400px;">
+        <h3 class="card-header text-center clean-header">{{chart.title}}</h3>
         <div *ngIf="chart.isEChart" echarts [options]="chart.getOptions()" class="demo-chart"></div>
         <div *ngIf="!chart.isEChart">
           <table class="table table-hover">
@@ -19,7 +19,7 @@
             </tbody>
           </table>
         </div>
-        <div class="card-footer text-muted mt-auto">
+        <div class="card-footer text-muted mt-auto clean-footer">
           Sidst opdateret x min siden
         </div>
       </div>

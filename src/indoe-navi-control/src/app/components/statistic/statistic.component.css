@@ -1,3 +1,22 @@
 .title{
     font-weight: bold;
 }
+
+.clean-footer{
+    background-color: var(--cardColor);
+    border-top: none;
+}
+
+.clean-header{
+    background-color: var(--cardColor);
+    border-bottom: none;
+}
+
+.card-borders{
+    /* Override bootstrap variables */
+    --bs-card-border-radius:1rem;
+    --bs-card-border-color:none;
+    --bs-card-inner-border-radius: calc(var(--bs-card-border-radius) - 1px);
+    --bs-card-inner-border-radius: calc(var(--bs-card-border-radius) - 1px);
+    box-shadow: 0px 0px 7px 0px #dddcdc;
+}
