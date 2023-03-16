@@ -9,7 +9,24 @@
 }
 
 .sidebar .active {
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
 }
-    
+
+.removeListBorders{
+    --bs-list-group-border-width:0px;
+}
+
+.selectedItemScale{
+    font-size: 1.2rem;
+}
+
+.iconSpacing a i{
+    margin-right: 10px;
+    font-size: 20px;
+}
+
+.itemPadding{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}

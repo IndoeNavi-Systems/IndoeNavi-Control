@@ -10,12 +10,12 @@ export class MenuComponent implements OnInit {
   constructor(private location: Location) {}
 
   menuItems : any[] = [
-    { name: "Statistik", url: "/statistic", isSelected: false },
-    { name: "SPE'er", url: "/spes",isSelected: false },
-    { name: "Ruter", url: "/routes",isSelected: false },
-    { name: "Kort indstillinger", url: "/map-settings",isSelected: false },
-    { name: "Vælg anden lokation", url: "/locations",isSelected: false },
-    { name: "Log ud", url: "/login",isSelected: false },
+    { name: "Statistik", url: "/statistic", isSelected: false, iconName:"fa-solid fa-chart-simple" },
+    { name: "SPE'er", url: "/spes",isSelected: false, iconName:"fa-solid fa-satellite-dish" },
+    { name: "Ruter", url: "/routes",isSelected: false, iconName:"fa-solid fa-route" },
+    { name: "Kort indstillinger", url: "/map-settings",isSelected: false, iconName:"fa-solid fa-map" },
+    { name: "Vælg anden lokation", url: "/locations",isSelected: false, iconName:"fa-solid fa-location-pin" },
+    { name: "Log ud", url: "/login",isSelected: false, iconName:"fa-solid fa-right-from-bracket" },
   ];
 
   ngOnInit(): void {
