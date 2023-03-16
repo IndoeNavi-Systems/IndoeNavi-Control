@@ -1,6 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
-import { IndoorMap } from '../../models/indoor-map';
 
 @Component({
   selector: 'app-map',
@@ -9,7 +8,6 @@ import { IndoorMap } from '../../models/indoor-map';
 })
 export class MapComponent implements AfterViewInit {
   private map : any;
-  private indoorMap : IndoorMap = new IndoorMap();
 
   private initMap(): void {
     this.map = L.map('map', {
