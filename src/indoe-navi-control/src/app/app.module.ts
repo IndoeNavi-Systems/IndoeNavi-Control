@@ -47,7 +47,7 @@ const appRoutes: Routes = [
     ),
     RouterModule,
     BrowserModule,
-    AppRoutingModule,
+    AppRouti ngModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     })
