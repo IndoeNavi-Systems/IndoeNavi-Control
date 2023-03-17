@@ -1,3 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
+/*Input colors for easy switching*/
+:root{
+    --dashboardBackground:#f0f2f9;
+    --cardColor: #FFFFFF;
+}
+.dashboardBackground {
+    background-color: var(--dashboardBackground);
+}
+

@@ -1,12 +1,14 @@
 <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
     <h2 class="text-center">ZBC Ringsted</h2>
     <div class="position-sticky">
-        <div class="list-group list-group-flush mx-3 mt-4">
-            <div *ngFor="let menuItem of menuItems" >
-                <a href="{{menuItem.url}}" *ngIf="menuItem.isSelected" class="list-group-item list-group-item-action py-2 ripple active">
-                    <span>{{menuItem.name}}</span>
+        <div class="list-group list-group-flush mx-3 mt-4 removeListBorders">
+            <div *ngFor="let menuItem of menuItems" class="iconSpacing" >
+                <a href="{{menuItem.url}}" *ngIf="menuItem.isSelected" class="list-group-item list-group-item-action itemPadding ripple active">
+                    <i class={{menuItem.iconName}}></i>
+                    <span class="selectedItemScale">{{menuItem.name}}</span>
                 </a>
-                <a href="{{menuItem.url}}" *ngIf="!menuItem.isSelected" class="list-group-item list-group-item-action py-2 ripple">
+                <a href="{{menuItem.url}}" *ngIf="!menuItem.isSelected" class="list-group-item list-group-item-action itemPadding ripple">
+                    <i class={{menuItem.iconName}}></i>
                     <span>{{menuItem.name}}</span>
                 </a>
             </div>   
