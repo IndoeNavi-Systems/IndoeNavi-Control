@@ -1,13 +1,19 @@
-import { vec2 } from "gl-matrix";
+import { mat4, vec2 } from "gl-matrix";
 import { Line } from "./geometry-data";
 import { Geometry } from "./geometry";
 import { number } from "echarts";
+import { GLWindow } from "./gl-window";
+import { Shader } from "./shader";
 
 export class Renderer{
-  gl : WebGL2RenderingContext;
+	glWindow : GLWindow;
+	shader : Shader;
 
-  constructor(gl : WebGL2RenderingContext){
-    this.gl = gl;
+  constructor(glWindow : GLWindow){
+    this.glWindow = glWindow;
+
+	this.shader = new Shader(glWindow, "basic2d", "attribute vec2 position;\n\nuniform mat4 model;\nuniform mat4 projection;\n\nvoid main()\n{\n    gl_Position = projection * model * vec4(position.xy, 0.0, 1.0);\n}", "varying vec4 color;\n\nuniform vec3 globalColor;\nuniform float alpha;\n\nvoid main()\n{    \n    color = vec4(globalColor, alpha);\n}  ");
+	this.shader.load();
   }
 
   drawLine(a: vec2, b : vec2) : void {
@@ -16,50 +22,54 @@ export class Renderer{
   }
 
   drawGeometry(geometry : Geometry){
+	const gl = this.glWindow.getGl();
+
     if (!geometry.isVerticesDataCreated)
     {
       this.bind(geometry);
     }
 
     // Run shader
+	let model : mat4 = mat4();
+
+	this.shader.setMat4("projection", glm::ortho(0.0f, this.window.getWidth(), this.window.GetHeight(), 0.0f, -1.0f, 1.0f));
 
     // Draw
-    this.gl.bindVertexArray(geometry.VAO);
-    this.gl.drawArrays(this.gl.TRIANGLES, 0, geometry.verticesData.vertexAmount);
-    this.gl.bindVertexArray(0);
+    gl.bindVertexArray(geometry.VAO);
+    gl.drawArrays(gl.TRIANGLES, 0, geometry.verticesData.vertexAmount);
+    gl.bindVertexArray(0);
   }
 
 	bind(geometry : Geometry)
 	{
-		if (!geometry.isVerticesDataCreated)
-		{
+		const gl = this.glWindow.getGl();
+
+		if (!geometry.isVerticesDataCreated){
 			geometry.generateVertices();
 		}
-		if (!geometry.isVerticesDataCreated)
-		{
+		if (!geometry.isVerticesDataCreated){
 			return;
 		}
-		if (geometry.VAO == null || geometry.VBO == null)
-		{
-      geometry.VBO = this.gl.createBuffer();
-      geometry.VAO = this.gl.createVertexArray();
-			this.gl.bindBuffer(this.gl.ARRAY_BUFFER, geometry.VBO);
-			this.gl.bindVertexArray(geometry.VAO);
+		if (geometry.VAO == null || geometry.VBO == null){
+      		geometry.VBO = gl.createBuffer();
+     		 geometry.VAO = gl.createVertexArray();
+			gl.bindBuffer(gl.ARRAY_BUFFER, geometry.VBO);
+			gl.bindVertexArray(geometry.VAO);
 		}
 
 		let verticesData = geometry.verticesData;
 
-		this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(verticesData.values), this.gl.STATIC_DRAW);
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verticesData.values), gl.STATIC_DRAW);
 
 		let previewsVertexDefinition = 0;
 		for (let i = 0; i < verticesData.vertexDefinition.length; i++)
 		{
 			previewsVertexDefinition += i != 0 ? verticesData.vertexDefinition[i - 1] : 0;
-			this.gl.vertexAttribPointer(i, verticesData.vertexDefinition[i], this.gl.FLOAT, false, verticesData.vertexSize, previewsVertexDefinition * 4);
-			this.gl.enableVertexAttribArray(i);
+			gl.vertexAttribPointer(i, verticesData.vertexDefinition[i], gl.FLOAT, false, verticesData.vertexSize, previewsVertexDefinition * 4);
+			gl.enableVertexAttribArray(i);
 		}
 
-		this.gl.bindBuffer(this.gl.ARRAY_BUFFER, 0);
-		this.gl.bindVertexArray(0);
+		gl.bindBuffer(gl.ARRAY_BUFFER, 0);
+		gl.bindVertexArray(0);
 	}
 }
