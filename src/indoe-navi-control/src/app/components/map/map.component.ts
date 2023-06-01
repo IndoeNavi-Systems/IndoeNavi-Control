@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { IndoeNaviMap } from './indoe-navi-map';
+import { IndoeNaviMap } from '../../map/indoe-navi-map';
 
 @Component({
   selector: 'app-map',
@@ -12,12 +12,7 @@ export class MapComponent implements AfterViewInit {
   constructor() { }
 
   ngAfterViewInit(): void {
-    this.map = new IndoeNaviMap(<HTMLCanvasElement>document.getElementById("mapCanvas")); 
+    this.map = new IndoeNaviMap(<HTMLCanvasElement>document.getElementById("mapCanvas"));
     this.map.initialize();
-
-  }
-
-  onClick(e : any) {
-
   }
 }
