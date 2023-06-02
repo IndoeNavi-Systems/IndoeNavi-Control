@@ -8,11 +8,11 @@ import { MenuComponent } from './components/menu/menu.component';
 import { StatisticComponent } from './components/statistic/statistic.component';
 import { RoutesComponent } from './components/routes/routes.component';
 import { MapSettingsComponent } from './components/map-settings/map-settings.component';
-import { MapComponent } from './components/map/map.component';
 import { SpesComponent } from './components/spes/spes.component';
 import { LoginComponent } from './components/login/login.component';
 import { LocationsComponent } from './components/locations/locations.component';
 import { NgxEchartsModule } from 'ngx-echarts';
+import { FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: 'statistic', component: StatisticComponent },
@@ -35,7 +35,6 @@ const appRoutes: Routes = [
     StatisticComponent,
     RoutesComponent,
     MapSettingsComponent,
-    MapComponent,
     SpesComponent,
     LoginComponent,
     LocationsComponent
@@ -50,7 +49,8 @@ const appRoutes: Routes = [
     AppRoutingModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
-    })
+    }),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

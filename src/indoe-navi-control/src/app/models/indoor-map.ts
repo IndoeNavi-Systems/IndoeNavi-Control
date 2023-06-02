@@ -14,19 +14,19 @@ export class IndoorMap{
     this.spes = spes;
   }
 
-  public getRouteNode(x : number, y : number) : RouteNode | null {
-    for (let i = 0; i < this.routeNodes.length; i++){
-      if (this.routeNodes[i].distanceToPoint(x, y) < 8){
-        return this.routeNodes[i];
+  public getSPE(x : number, y : number) : SPE | null {
+    for (let i = 0; i < this.spes.length; i++){
+      if (this.spes[i].distanceToPoint(x, y) < 8){
+        return this.spes[i];
       }
     }
     return null;
   }
 
-  public deleteRouteNode(id : number){
-    for (let i = 0; i < this.routeNodes.length; i++){
-      if (this.routeNodes[i].id == id){
-        this.routeNodes.splice(i, 1);
+  public deleteSPE(id : number){
+    for (let i = 0; i < this.spes.length; i++){
+      if (this.spes[i].id == id){
+        this.spes.splice(i, 1);
         return;
       }
     }
