@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LocationsComponent } from './components/locations/locations.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: 'statistic', component: StatisticComponent },
@@ -46,6 +47,7 @@ const appRoutes: Routes = [
     ),
     RouterModule,
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
