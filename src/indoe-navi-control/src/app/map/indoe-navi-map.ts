@@ -75,10 +75,11 @@ export class IndoeNaviMap{
   }
 
   private renderingLoop(){
+      let speDiv = <HTMLElement>document.getElementById('speDiv');
       let canvas = this.canvas;
       let ctx = this.ctx;
-      canvas.width  = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.width  = speDiv.clientWidth;
+      canvas.height = speDiv.getBoundingClientRect().height-5;
 
       this.drawBackground();
       this.drawSPENodes();
