@@ -4,6 +4,10 @@ import { Observable } from 'rxjs';
 import { IndoorMap } from '../models/indoor-map';
 import { SPE } from '../models/spe';
 import { RouteNode } from '../models/route-node';
+import { PathSession } from '../models/statistics/pathsession';
+import { ActiveUser } from '../models/statistics/activeuser';
+import { DestinationVisit } from '../models/statistics/destinationvisit';
+import { UsedSensor } from '../models/statistics/usedsensor';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +31,22 @@ export class IndoeNaviAPIService {
 
   updateSPEs(spes : SPE[]) : Observable<IndoorMap>{
     return this.http.put<IndoorMap>(this.baseUrl + "/spes/", spes);
+  }
+
+  // Statistics endpoints 
+  getPathSessions() : Observable<PathSession[]>{
+    return this.http.get<PathSession[]>(this.baseUrl + "/Statistic/pathsessions")
+  }
+  
+  getActiveUsers() : Observable<ActiveUser[]>{
+    return this.http.get<ActiveUser[]>(this.baseUrl + "/Statistic/activeusers")
+  }
+
+  getDestinationVisits() : Observable<DestinationVisit[]>{
+    return this.http.get<DestinationVisit[]>(this.baseUrl + "/Statistic/destinationvisits")
+  }
+
+  getUsedSensors() : Observable<UsedSensor[]>{
+    return this.http.get<UsedSensor[]>(this.baseUrl + "/Statistic/usedsensor")
   }
 }
