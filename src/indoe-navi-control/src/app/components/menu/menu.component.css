@@ -6,6 +6,7 @@
     box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
     z-index: 600;
     height: 100%;
+    min-height: 100vh;
 }
 
 .sidebar .active {
