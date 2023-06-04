@@ -15,7 +15,7 @@ import { UsedSensor } from '../models/statistics/usedsensor';
 export class IndoeNaviAPIService {
   constructor(private http: HttpClient) {}
 
-  private baseUrl: string = "https://localhost:7052";
+  private baseUrl: string = "https://indoenavi.api.viften.elkok.dk/";
 
   getMap() : Observable<IndoorMap>{
     return this.http.get<IndoorMap>(this.baseUrl + "/Map?area=ZBC-Ringsted");
