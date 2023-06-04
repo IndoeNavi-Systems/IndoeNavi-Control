@@ -15,22 +15,14 @@ import { UsedSensor } from '../models/statistics/usedsensor';
 export class IndoeNaviAPIService {
   constructor(private http: HttpClient) {}
 
-  private baseUrl: string = "https://indoenavi.api.viften.elkok.dk/";
+  private baseUrl: string = "https://localhost:7052";
 
   getMap() : Observable<IndoorMap>{
-    return this.http.get<IndoorMap>(this.baseUrl + "/map");
+    return this.http.get<IndoorMap>(this.baseUrl + "/Map?area=ZBC-Ringsted");
   }
 
-  importMap(imageData : string) : Observable<IndoorMap>{
-    return this.http.put<IndoorMap>(this.baseUrl + "/import/", imageData);
-  }
-
-  updateRouteNodes(routeNodes : RouteNode[]) : Observable<IndoorMap>{
-    return this.http.put<IndoorMap>(this.baseUrl + "/nodes/", routeNodes);
-  }
-
-  updateSPEs(spes : SPE[]) : Observable<IndoorMap>{
-    return this.http.put<IndoorMap>(this.baseUrl + "/spes/", spes);
+  updateMap(map : IndoorMap) : Observable<IndoorMap>{
+    return this.http.put<IndoorMap>(this.baseUrl + "/Map", map);
   }
 
   // Statistics endpoints 

@@ -4,8 +4,9 @@ import { SPE } from "./spe";
 export class IndoorMap{
   area : string;
   imageData : string;
-  routeNodes : RouteNode[];
-  spes : SPE[];
+  routeNodes : RouteNode[] = [];
+  spes : SPE[] = [];
+  meterPerPixel : number = 1;
 
   public constructor(area : string, imageData : string, routeNodes : RouteNode[], spes : SPE[]){
     this.area = area;
@@ -16,19 +17,23 @@ export class IndoorMap{
 
   public getSPE(x : number, y : number) : SPE | null {
     for (let i = 0; i < this.spes.length; i++){
-      if (this.spes[i].distanceToPoint(x, y) < 8){
+      if (this.distanceToSPE(this.spes[i], x, y) < 32){
         return this.spes[i];
       }
     }
     return null;
   }
 
-  public deleteSPE(id : number){
+  public deleteSPE(spe : SPE){
     for (let i = 0; i < this.spes.length; i++){
-      if (this.spes[i].id == id){
+      if (this.spes[i] == spe){
         this.spes.splice(i, 1);
         return;
       }
     }
+  }
+
+  public distanceToSPE(spe : SPE, x : number, y : number) : number{
+    return Math.sqrt(Math.abs((x - spe.x)**2 + (y - spe.y)**2));
   }
 }

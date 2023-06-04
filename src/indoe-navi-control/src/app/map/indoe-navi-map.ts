@@ -23,6 +23,8 @@ export class IndoeNaviMap{
       let canvas = this.canvas;
       let self = this;
 
+      this.ctx.translate(4.1, 4.1);
+
       canvas.oncontextmenu = function(e) { e.preventDefault(); e.stopPropagation(); }
       canvas.onwheel = function(event){
           event.preventDefault();
@@ -39,7 +41,7 @@ export class IndoeNaviMap{
     this.camera.startCameraDrag(event.offsetX, event.offsetY);
 
     if (event.buttons == 2){
-      this.indoorMap.spes.push(new SPE(this.camera.xPosStart, this.camera.yPosStart, ""));
+      this.indoorMap.spes.push(new SPE(this.camera.xPosStart, this.camera.yPosStart, "Ny SPE", "00:00:00:00"));
     }
 
     this.speNodeHovered = this.indoorMap.getSPE(event.offsetX - this.camera.xPos, event.offsetY - this.camera.yPos);
@@ -68,7 +70,7 @@ export class IndoeNaviMap{
 
   private onKeyDown(event : KeyboardEvent){
     if (event.code == "Delete" && this.speNodeSelected != null){
-      this.indoorMap.deleteSPE(this.speNodeSelected.id);
+      this.indoorMap.deleteSPE(this.speNodeSelected);
       this.speNodeSelected = null;
       this.speNodeHovered = null;
     }
@@ -84,34 +86,49 @@ export class IndoeNaviMap{
       this.drawSPENodes();
 
       if (this.speNodeHovered != null){
-        this.drawSPENode("orange", this.speNodeHovered);
+        this.drawSPENode("rgba(255, 255, 0, 0.4)", this.speNodeHovered);
       }
       if (this.speNodeSelected != null){
-        this.drawSPENode("red", this.speNodeSelected);
+        this.drawSPENode("rgba(0, 255, 0, 0.4)", this.speNodeSelected);
       }
   }
 
   private drawBackground(){
     let canvas = this.canvas;
     let ctx = this.ctx;
-    ctx.fillStyle = "rgb(240, 240, 240)";
+    ctx.fillStyle = "rgba(240, 240, 240)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(<CanvasImageSource>document.getElementById("mapImage"), this.camera.xPos, this.camera.yPos);
   }
 
   private drawSPENodes(){
     for (let i = 0; i < this.indoorMap.spes.length; i++){
-      this.drawSPENode("green", this.indoorMap.spes[i]);
+      this.drawSPENode("rgba(0, 0, 0, 0)", this.indoorMap.spes[i]);
     }
   }
 
   private drawSPENode(color : string, spe : SPE){
     let ctx = this.ctx;
-    ctx.strokeStyle = "white";
+    let speImage = <CanvasImageSource>document.getElementById("speImage");
+    let xCenter = (<number>speImage.width / 2.0);
+    let yCenter = (<number>speImage.height / 2.0);
+
+    ctx.drawImage(speImage, spe.x + this.camera.xPos - xCenter, spe.y + this.camera.yPos - yCenter);
+
+    ctx.strokeStyle = "rgba(0, 0, 0, 0)";
     ctx.fillStyle = color;
     ctx.beginPath();
-    ctx.arc(spe.x + this.camera.xPos, spe.y + this.camera.yPos, 6, 0, 2 * Math.PI, false);
+    ctx.arc(spe.x + this.camera.xPos, spe.y + this.camera.yPos, 40, 0, 2 * Math.PI, false);
     ctx.fill();
     ctx.stroke();
+
+    ctx.strokeStyle = "rgba(255, 255, 255, 1)";
+    ctx.fillStyle = "rgba(0, 0, 0, 1)";
+    ctx.font = "bold 24px Arial";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.textAlign = "center";
+    ctx.strokeText(spe.name, spe.x + this.camera.xPos , spe.y + this.camera.yPos - yCenter);
+    ctx.fillText(spe.name, spe.x + this.camera.xPos , spe.y + this.camera.yPos - yCenter);
   }
 }
