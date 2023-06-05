@@ -1,5 +1,8 @@
 import { Component, OnInit  } from '@angular/core';
 import { Location } from '@angular/common';
+import { IndoeNaviAPIService } from 'src/app/services/indoe-navi-api.service';
+import { IndoorMap } from 'src/app/models/indoor-map';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -8,6 +11,7 @@ import { Location } from '@angular/common';
 })
 export class MenuComponent implements OnInit {
   constructor(private location: Location) {}
+
 
   menuItems : any[] = [
     { name: "Statistik", url: "/statistic", isSelected: false, iconName:"fa-solid fa-chart-simple" },
