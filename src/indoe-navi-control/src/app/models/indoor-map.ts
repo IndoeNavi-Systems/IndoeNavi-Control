@@ -2,13 +2,15 @@ import { RouteNode } from "./route-node";
 import { SPE } from "./spe";
 
 export class IndoorMap{
+  id? : any;
   area : string;
   imageData : string;
   routeNodes : RouteNode[] = [];
   spes : SPE[] = [];
   meterPerPixel : number = 1;
 
-  public constructor(area : string, imageData : string, routeNodes : RouteNode[], spes : SPE[]){
+  public constructor(id : any, area : string, imageData : string, routeNodes : RouteNode[], spes : SPE[]){
+    this.id = id;
     this.area = area;
     this.imageData = imageData;
     this.routeNodes = routeNodes;

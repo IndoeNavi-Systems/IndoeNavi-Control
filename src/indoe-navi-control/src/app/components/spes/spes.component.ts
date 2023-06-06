@@ -11,7 +11,7 @@ import { IndoeNaviAPIService } from 'src/app/services/indoe-navi-api.service';
 })
 export class SpesComponent {
   public map : IndoeNaviMap | null = null;
-  public indoorMap : IndoorMap = new IndoorMap("", "", [], []);
+  public indoorMap : IndoorMap = new IndoorMap("", "", "", [], []);
 
   constructor(public indoeNaviAPIService : IndoeNaviAPIService){}
 
@@ -23,7 +23,7 @@ export class SpesComponent {
       let mapImage : any = document.getElementById("mapImage");
       mapImage.src = "data:image/png;base64," + indoorMap.imageData;
       
-      self.indoorMap = new IndoorMap(indoorMap.area, indoorMap.imageData, indoorMap.routeNodes, indoorMap.spes);
+      self.indoorMap = new IndoorMap(indoorMap.id, indoorMap.area, indoorMap.imageData, indoorMap.routeNodes, indoorMap.spes);
       self.map = new IndoeNaviMap(mapCanvas, self.indoorMap);
       self.map.initialize();
     });
