@@ -27,18 +27,18 @@ export class IndoeNaviAPIService {
 
   // Statistics endpoints 
   getPathSessions() : Observable<PathSession[]>{
-    return this.http.get<PathSession[]>(this.baseUrl + "/Statistic/pathsessions")
+    return this.http.get<PathSession[]>(this.baseUrl + "/Statistic/pathsessions?area=ZBC-Ringsted")
   }
   
   getActiveUsers() : Observable<ActiveUser[]>{
-    return this.http.get<ActiveUser[]>(this.baseUrl + "/Statistic/activeusers")
+    return this.http.get<ActiveUser[]>(this.baseUrl + "/Statistic/activeusers?area=ZBC-Ringsted")
   }
 
   getDestinationVisits() : Observable<DestinationVisit[]>{
-    return this.http.get<DestinationVisit[]>(this.baseUrl + "/Statistic/destinationvisits")
+    return this.http.get<DestinationVisit[]>(this.baseUrl + "/Statistic/destinationvisits?area=ZBC-Ringsted")
   }
 
   getUsedSensors() : Observable<UsedSensor[]>{
-    return this.http.get<UsedSensor[]>(this.baseUrl + "/Statistic/usedsensor")
+    return this.http.get<UsedSensor[]>(this.baseUrl + "/Statistic/usedsensor?area=ZBC-Ringsted")
   }
 }
