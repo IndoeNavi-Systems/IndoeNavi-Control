@@ -18,19 +18,11 @@ export class IndoeNaviAPIService {
   private baseUrl: string = "https://indoenavi.api.viften.elkok.dk/";
 
   getMap() : Observable<IndoorMap>{
-    return this.http.get<IndoorMap>(this.baseUrl + "/map");
+    return this.http.get<IndoorMap>(this.baseUrl + "/Map?area=ZBC-Ringsted");
   }
 
-  importMap(imageData : string) : Observable<IndoorMap>{
-    return this.http.put<IndoorMap>(this.baseUrl + "/import/", imageData);
-  }
-
-  updateRouteNodes(routeNodes : RouteNode[]) : Observable<IndoorMap>{
-    return this.http.put<IndoorMap>(this.baseUrl + "/nodes/", routeNodes);
-  }
-
-  updateSPEs(spes : SPE[]) : Observable<IndoorMap>{
-    return this.http.put<IndoorMap>(this.baseUrl + "/spes/", spes);
+  updateMap(map : IndoorMap) : Observable<IndoorMap>{
+    return this.http.put<IndoorMap>(this.baseUrl + "/Map", map);
   }
 
   // Statistics endpoints 

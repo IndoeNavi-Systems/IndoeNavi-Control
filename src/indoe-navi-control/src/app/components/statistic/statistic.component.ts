@@ -58,6 +58,5 @@ export class StatisticComponent implements OnInit  {
         });
 
     });
-
   }
 }
