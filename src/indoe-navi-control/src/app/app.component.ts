@@ -12,6 +12,6 @@ export class AppComponent implements OnInit {
   hideMenu = false;
 
   ngOnInit(): void {
-    this.hideMenu = this.location.path() == "/login" || this.location.path() == "/locations";
+    this.hideMenu = this.location.path() == "" || this.location.path() == "/login" || this.location.path() == "/locations";
   }
 }

@@ -10,18 +10,18 @@
             
             <div class="form-group mx-3">
                 <label class="form-label mt-2">Navn</label>
-                <input type="text" class="form-control" placeholder="Skriv SPE navn" *ngIf="map && map.speNodeSelected" [(ngModel)]="map.speNodeSelected.name">
+                <input type="text" class="form-control" placeholder="Skriv SPE navn" *ngIf="map && map.speNodeSelected" [(ngModel)]="map.speNodeSelected.name" (change)="saveData()">
                 <label class="form-label mt-2">MAC adresse</label>
-                <input type="text" class="form-control" placeholder="Skriv MAC adresse" *ngIf="map && map.speNodeSelected" [(ngModel)]="map.speNodeSelected.macAdress">
+                <input type="text" class="form-control" placeholder="Skriv MAC adresse" *ngIf="map && map.speNodeSelected" [(ngModel)]="map.speNodeSelected.macAdress" (change)="saveData()">
 
                 <div class="row">
                     <div class="col-6">
                         <label class="form-label mt-2">X position</label>
-                        <input type="number" class="form-control" placeholder="Skriv x position" *ngIf="map && map.speNodeSelected" [(ngModel)]="map.speNodeSelected.x">
+                        <input type="number" class="form-control" placeholder="Skriv x position" *ngIf="map && map.speNodeSelected" [(ngModel)]="map.speNodeSelected.x" (change)="saveData()">
                     </div>
                     <div class="col-6">
                         <label class="form-label mt-2">Y position</label>
-                        <input type="number" class="form-control" placeholder="Skriv y position" *ngIf="map && map.speNodeSelected" [(ngModel)]="map.speNodeSelected.y">
+                        <input type="number" class="form-control" placeholder="Skriv y position" *ngIf="map && map.speNodeSelected" [(ngModel)]="map.speNodeSelected.y" (change)="saveData()">
                     </div>
                 </div>
       
