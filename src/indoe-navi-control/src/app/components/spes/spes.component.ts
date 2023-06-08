@@ -27,13 +27,18 @@ export class SpesComponent {
       self.map = new IndoeNaviMap(mapCanvas, self.indoorMap);
       self.map.initialize();
     });
-    setInterval(function() {  self.indoeNaviAPIService.updateMap(self.indoorMap).subscribe(); }, 1000);
+    mapCanvas.addEventListener("mapupdated",  (CustomEvent) => { self.saveData(); }, false);
   }
 
   onDeleteSpe(){
     if (this.map?.speNodeSelected != null){
       this.indoorMap.deleteSPE(this.map.speNodeSelected);
       this.map.speNodeSelected = null;
+      this.indoeNaviAPIService.updateMap(this.indoorMap).subscribe();
     }
+  }
+
+  saveData(){
+    this.indoeNaviAPIService.updateMap(this.indoorMap).subscribe();
   }
 }

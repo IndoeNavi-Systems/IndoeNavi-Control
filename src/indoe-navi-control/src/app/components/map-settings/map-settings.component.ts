@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { IndoeNaviAPIService } from 'src/app/services/indoe-navi-api.service';
 import { Buffer } from "buffer";
 import { IndoorMap } from 'src/app/models/indoor-map';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-map-settings',
@@ -9,12 +10,17 @@ import { IndoorMap } from 'src/app/models/indoor-map';
   styleUrls: ['./map-settings.component.css']
 })
 export class MapSettingsComponent {
-  constructor(public indoeNaviAPIService : IndoeNaviAPIService){}
+  public imageData : string = "";
+  public meterPerPixel : number = 0;
+
+  constructor(public indoeNaviAPIService : IndoeNaviAPIService){
+  }
 
   ngAfterViewInit(): void {
     let self = this;
     this.indoeNaviAPIService.getMap().subscribe((indoorMap: IndoorMap) => {
-      self.updateMapImage(indoorMap.imageData);
+      self.imageData = indoorMap.imageData;
+      self.meterPerPixel = indoorMap.meterPerPixel;
     });
   }
 
@@ -26,30 +32,25 @@ export class MapSettingsComponent {
     let self = this;
     function handleFileLoad(event : any){
       let imageDataBase64 : string = Buffer.from(event.target.result, 'binary').toString('base64');
-      
-      self.indoeNaviAPIService.getMap().subscribe((indoorMap: IndoorMap) => {
-        indoorMap.imageData = imageDataBase64;
-        self.indoeNaviAPIService.updateMap(indoorMap).subscribe();
-        self.updateMapImage(indoorMap.imageData);
-      });
+      self.imageData = imageDataBase64;
+      self.saveData();
     }
   }
-  
   onOpenFileExplore(){
     document.getElementById('fileInput')?.click()
   }
 
   onRemoveMap(){
-    let self = this;
-    self.indoeNaviAPIService.getMap().subscribe((indoorMap: IndoorMap) => {
-      indoorMap.imageData = "";
-      self.indoeNaviAPIService.updateMap(indoorMap).subscribe();
-      self.updateMapImage(indoorMap.imageData);
-    });
+    this.imageData = "";
+    this.saveData();
   }
 
-  updateMapImage(imageData : string){
-    let mapImage : any = document.getElementById("mapImage");
-    mapImage.src = "data:image/png;base64," + imageData;
+  saveData(){
+    let self = this;
+    this.indoeNaviAPIService.getMap().subscribe((indoorMap: IndoorMap) => {
+      indoorMap.imageData = self.imageData;
+      indoorMap.meterPerPixel = self.meterPerPixel;
+      this.indoeNaviAPIService.updateMap(indoorMap).subscribe();
+    });
   }
 }

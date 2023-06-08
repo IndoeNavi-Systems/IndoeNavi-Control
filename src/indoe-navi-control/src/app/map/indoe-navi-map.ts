@@ -5,13 +5,13 @@ import { Camrea } from "./camera";
 
 
 export class IndoeNaviMap{
+  public speNodeHovered : SPE | null = null;
+  public speNodeSelected : SPE | null = null;
+  private mapUpdatedEvent = new CustomEvent("mapupdated", {detail: 3});
   private canvas : HTMLCanvasElement;
   private ctx : CanvasRenderingContext2D;
   private camera = new Camrea();
-
   private indoorMap : IndoorMap;
-  public speNodeHovered : SPE | null = null;
-  public speNodeSelected : SPE | null = null;
 
   public constructor(canvas : HTMLCanvasElement, indoorMap : IndoorMap){
       this.canvas = canvas;
@@ -33,7 +33,6 @@ export class IndoeNaviMap{
       canvas.addEventListener("mousemove", function(event : MouseEvent) { self.onMouseMove(event); }, false);
       canvas.addEventListener("mousedown", function(event : MouseEvent) { self.onMouseDown(event); }, false);
       document.addEventListener("keydown", function(event : KeyboardEvent) { self.onKeyDown(event); }, false);
-
       setInterval(function() { self.renderingLoop(); }, 15);
   }
 
@@ -42,12 +41,16 @@ export class IndoeNaviMap{
 
     if (event.buttons == 2){
       this.indoorMap.spes.push(new SPE(this.camera.xPosStart, this.camera.yPosStart, "Ny SPE", "00:00:00:00"));
+      this.canvas.dispatchEvent(this.mapUpdatedEvent);
     }
 
     this.speNodeHovered = this.indoorMap.getSPE(event.offsetX - this.camera.xPos, event.offsetY - this.camera.yPos);
 
     if (event.button == 0){
       this.speNodeSelected = this.speNodeHovered;
+      if (this.speNodeSelected == null){
+        this.canvas.dispatchEvent(this.mapUpdatedEvent);
+      }
     }
   }
 
@@ -73,6 +76,7 @@ export class IndoeNaviMap{
       this.indoorMap.deleteSPE(this.speNodeSelected);
       this.speNodeSelected = null;
       this.speNodeHovered = null;
+      this.canvas.dispatchEvent(this.mapUpdatedEvent);
     }
   }
 
