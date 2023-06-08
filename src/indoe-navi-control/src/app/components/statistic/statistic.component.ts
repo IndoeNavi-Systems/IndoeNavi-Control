@@ -1,5 +1,4 @@
 import { Component, OnInit  } from '@angular/core';
-import { Observable } from 'rxjs';
 import { BlockChart } from 'src/app/models/charts/block-chart';
 import { Chart } from 'src/app/models/charts/chart';
 import { ListChart } from 'src/app/models/charts/list-chart';
@@ -28,7 +27,7 @@ export class StatisticComponent implements OnInit  {
 
     // Active Users
     this.statisticHandler.loadActiveUsers().subscribe((data: ActiveUser[]) => {
-      next: 
+      next:
         data.forEach(a => {
           (<BlockChart>this.charts[2]).values.push({label: a.date, value: a.count})
         });
@@ -36,15 +35,15 @@ export class StatisticComponent implements OnInit  {
     });
     // Path sessions
     this.statisticHandler.loadPathSessions().subscribe((data: PathSession[]) => {
-      next: 
+      next:
         data.forEach(ps => {
           (<BlockChart>this.charts[0]).values.push({label: ps.date, value: ps.count})
         });
 
     });
-    // Destination visits 
+    // Destination visits
     this.statisticHandler.loadDestVisits().subscribe((data: DestinationVisit[]) => {
-      next: 
+      next:
         data.forEach(dv => {
           (<ListChart>this.charts[3]).table.rows.push({values: [dv.destination, dv.count.toString()]})
         });
@@ -52,7 +51,7 @@ export class StatisticComponent implements OnInit  {
     });
     // Used sensors
     this.statisticHandler.loadUsedSensors().subscribe((data: UsedSensor[]) => {
-      next: 
+      next:
         data.forEach(us => {
           (<ListChart>this.charts[1]).table.rows.push({values: [us.sensorName, us.count.toString()]})
         });

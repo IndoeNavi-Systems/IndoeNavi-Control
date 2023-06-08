@@ -1,8 +1,7 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 import { IndoeNaviAPIService } from 'src/app/services/indoe-navi-api.service';
 import { Buffer } from "buffer";
 import { IndoorMap } from 'src/app/models/indoor-map';
-import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-map-settings',
@@ -28,7 +27,7 @@ export class MapSettingsComponent {
     const reader = new FileReader()
     reader.onload = handleFileLoad;
     reader.readAsBinaryString(event.target.files[0])
-    
+
     let self = this;
     function handleFileLoad(event : any){
       let imageDataBase64 : string = Buffer.from(event.target.result, 'binary').toString('base64');

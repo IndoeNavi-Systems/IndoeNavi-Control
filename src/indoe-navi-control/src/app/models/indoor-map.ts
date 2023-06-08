@@ -9,12 +9,13 @@ export class IndoorMap{
   spes : SPE[] = [];
   meterPerPixel : number = 1;
 
-  public constructor(id : any, area : string, imageData : string, routeNodes : RouteNode[], spes : SPE[]){
+  public constructor(id : any, area : string, imageData : string, routeNodes : RouteNode[], spes : SPE[], meterPerPixel : number){
     this.id = id;
     this.area = area;
     this.imageData = imageData;
     this.routeNodes = routeNodes;
     this.spes = spes;
+    this.meterPerPixel = meterPerPixel;
   }
 
   public getSPE(x : number, y : number) : SPE | null {

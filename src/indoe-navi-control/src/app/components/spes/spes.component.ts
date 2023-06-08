@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IndoeNaviMap } from 'src/app/map/indoe-navi-map';
 import { IndoorMap } from 'src/app/models/indoor-map';
-import { SPE } from 'src/app/models/spe';
 import { IndoeNaviAPIService } from 'src/app/services/indoe-navi-api.service';
 
 @Component({
@@ -11,7 +10,7 @@ import { IndoeNaviAPIService } from 'src/app/services/indoe-navi-api.service';
 })
 export class SpesComponent {
   public map : IndoeNaviMap | null = null;
-  public indoorMap : IndoorMap = new IndoorMap("", "", "", [], []);
+  public indoorMap : IndoorMap = new IndoorMap("", "", "", [], [], 1);
 
   constructor(public indoeNaviAPIService : IndoeNaviAPIService){}
 
@@ -22,8 +21,8 @@ export class SpesComponent {
     this.indoeNaviAPIService.getMap().subscribe((indoorMap: IndoorMap) => {
       let mapImage : any = document.getElementById("mapImage");
       mapImage.src = "data:image/png;base64," + indoorMap.imageData;
-      
-      self.indoorMap = new IndoorMap(indoorMap.id, indoorMap.area, indoorMap.imageData, indoorMap.routeNodes, indoorMap.spes);
+
+      self.indoorMap = new IndoorMap(indoorMap.id, indoorMap.area, indoorMap.imageData, indoorMap.routeNodes, indoorMap.spes, indoorMap.meterPerPixel);
       self.map = new IndoeNaviMap(mapCanvas, self.indoorMap);
       self.map.initialize();
     });
