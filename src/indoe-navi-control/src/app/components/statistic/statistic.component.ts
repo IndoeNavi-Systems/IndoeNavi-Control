@@ -29,7 +29,7 @@ export class StatisticComponent implements OnInit  {
     this.statisticHandler.loadActiveUsers().subscribe((data: ActiveUser[]) => {
       next:
         data.forEach(a => {
-          (<BlockChart>this.charts[2]).values.push({label: a.date, value: a.count})
+          (<BlockChart>this.charts[2]).values.push({label: (new Date(a.date)).toLocaleDateString(), value: a.count})
         });
 
     });
@@ -37,7 +37,7 @@ export class StatisticComponent implements OnInit  {
     this.statisticHandler.loadPathSessions().subscribe((data: PathSession[]) => {
       next:
         data.forEach(ps => {
-          (<BlockChart>this.charts[0]).values.push({label: ps.date, value: ps.count})
+          (<BlockChart>this.charts[0]).values.push({label: (new Date(ps.date)).toLocaleDateString(), value: ps.count})
         });
 
     });
