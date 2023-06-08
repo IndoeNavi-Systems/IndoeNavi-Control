@@ -1,6 +1,6 @@
 export interface UsedSensor{
     id? : any,
-    sensorName : string,
+    name : string,
     count : number,
     area : string,
 }

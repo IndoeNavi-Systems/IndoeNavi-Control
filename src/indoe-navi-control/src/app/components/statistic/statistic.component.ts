@@ -45,7 +45,7 @@ export class StatisticComponent implements OnInit  {
     this.statisticHandler.loadDestVisits().subscribe((data: DestinationVisit[]) => {
       next:
         data.forEach(dv => {
-          (<ListChart>this.charts[3]).table.rows.push({values: [dv.destination, dv.count.toString()]})
+          (<ListChart>this.charts[3]).table.rows.push({values: [dv.name, dv.count.toString()]})
         });
 
     });
@@ -53,7 +53,7 @@ export class StatisticComponent implements OnInit  {
     this.statisticHandler.loadUsedSensors().subscribe((data: UsedSensor[]) => {
       next:
         data.forEach(us => {
-          (<ListChart>this.charts[1]).table.rows.push({values: [us.sensorName, us.count.toString()]})
+          (<ListChart>this.charts[1]).table.rows.push({values: [us.name, us.count.toString()]})
         });
 
     });
