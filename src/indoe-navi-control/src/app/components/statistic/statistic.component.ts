@@ -29,7 +29,7 @@ export class StatisticComponent implements OnInit  {
     this.statisticHandler.loadActiveUsers().subscribe((data: ActiveUser[]) => {
       next:
         data.forEach(a => {
-          (<BlockChart>this.charts[2]).values.push({label: a.date, value: a.count})
+          (<BlockChart>this.charts[2]).values.push({label: (new Date(a.date)).toLocaleDateString(), value: a.count})
         });
 
     });
@@ -37,7 +37,7 @@ export class StatisticComponent implements OnInit  {
     this.statisticHandler.loadPathSessions().subscribe((data: PathSession[]) => {
       next:
         data.forEach(ps => {
-          (<BlockChart>this.charts[0]).values.push({label: ps.date, value: ps.count})
+          (<BlockChart>this.charts[0]).values.push({label: (new Date(ps.date)).toLocaleDateString(), value: ps.count})
         });
 
     });
@@ -45,7 +45,7 @@ export class StatisticComponent implements OnInit  {
     this.statisticHandler.loadDestVisits().subscribe((data: DestinationVisit[]) => {
       next:
         data.forEach(dv => {
-          (<ListChart>this.charts[3]).table.rows.push({values: [dv.destination, dv.count.toString()]})
+          (<ListChart>this.charts[3]).table.rows.push({values: [dv.name, dv.count.toString()]})
         });
 
     });
@@ -53,7 +53,7 @@ export class StatisticComponent implements OnInit  {
     this.statisticHandler.loadUsedSensors().subscribe((data: UsedSensor[]) => {
       next:
         data.forEach(us => {
-          (<ListChart>this.charts[1]).table.rows.push({values: [us.sensorName, us.count.toString()]})
+          (<ListChart>this.charts[1]).table.rows.push({values: [us.name, us.count.toString()]})
         });
 
     });

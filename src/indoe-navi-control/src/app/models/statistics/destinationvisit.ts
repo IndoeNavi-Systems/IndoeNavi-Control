@@ -1,6 +1,6 @@
 export interface DestinationVisit{
     id? : any,
-    destination : string,
+    name : string,
     count : number,
     area : string,
 }
