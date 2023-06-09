@@ -1,5 +1,5 @@
-<nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
-    <h2 class="text-center">ZBC-Ringsted</h2>
+<nav id="navbar navbar-expand-md navbar-dark bg-primary fixed-left sidebar" class="collapse d-lg-block sidebar collapse bg-white">
+    <h2 class="text-center">ZBC Ringsted</h2>
     <div class="position-sticky">
         <div class="list-group list-group-flush mx-3 mt-4 removeListBorders">
             <div *ngFor="let menuItem of menuItems" class="iconSpacing" >
@@ -11,7 +11,7 @@
                     <i class={{menuItem.iconName}}></i>
                     <span>{{menuItem.name}}</span>
                 </a>
-            </div>   
+            </div>
         </div>
     </div>
 </nav>
