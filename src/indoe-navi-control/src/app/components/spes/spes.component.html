@@ -1,13 +1,13 @@
 <div class="row gx-0 gy-0">
-    <div class="col-10 vh-100" id="speDiv">
+    <div class="vh-100" [ngClass]="{'col-9':map?.speNodeSelected != null, 'col-12':!map?.speNodeSelected == null}" id="speDiv">
       <canvas id="mapCanvas"></canvas>
       <img hidden="true" id="mapImage" />
       <img hidden="true" id="speImage" src="../../../assets/SPE.png" />
     </div>
-    <div class="col-2" *ngIf="map?.speNodeSelected != null as spe">
+    <div class="col-3" *ngIf="map?.speNodeSelected != null as spe">
         <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
             <h3 class="text-center">{{map?.speNodeSelected?.name}}</h3>
-            
+
             <div class="form-group mx-3">
                 <label class="form-label mt-2">Navn</label>
                 <input type="text" class="form-control" placeholder="Skriv SPE navn" *ngIf="map && map.speNodeSelected" [(ngModel)]="map.speNodeSelected.name" (change)="saveData()">
@@ -24,7 +24,7 @@
                         <input type="number" class="form-control" placeholder="Skriv y position" *ngIf="map && map.speNodeSelected" [(ngModel)]="map.speNodeSelected.y" (change)="saveData()">
                     </div>
                 </div>
-      
+
                 <div class="d-grid gap-2 mt-4">
                     <button class="btn btn-lg btn-primary" type="button" (click)="onDeleteSpe()">Slet</button>
                 </div>
