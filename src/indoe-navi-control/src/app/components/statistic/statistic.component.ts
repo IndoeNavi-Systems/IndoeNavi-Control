@@ -1,12 +1,10 @@
 import { Component, OnInit  } from '@angular/core';
-import { BlockChart } from 'src/app/models/charts/block-chart';
-import { Chart } from 'src/app/models/charts/chart';
-import { ListChart } from 'src/app/models/charts/list-chart';
-import { ActiveUser } from 'src/app/models/statistics/activeuser';
-import { DestinationVisit } from 'src/app/models/statistics/destinationvisit';
-import { PathSession } from 'src/app/models/statistics/pathsession';
-import { UsedSensor } from 'src/app/models/statistics/usedsensor';
-import { StatisticsHandlerService } from 'src/app/services/statistics-handler.service';
+import { BlockChart } from 'src/app/models/block-chart';
+import { Chart } from 'src/app/models/chart';
+import { ListChart } from 'src/app/models/list-chart';
+import { DateValue } from 'src/app/models/date-value';
+import { NameValue } from 'src/app/models/name-value';
+import { IndoeNaviAPIService } from 'src/app/services/indoe-navi-api.service';
 
 @Component({
   selector: 'app-statistic',
@@ -15,7 +13,7 @@ import { StatisticsHandlerService } from 'src/app/services/statistics-handler.se
 })
 export class StatisticComponent implements OnInit  {
   charts: Chart[] = [];
-  constructor(public statisticHandler: StatisticsHandlerService) {}
+  constructor(public indoeNaviAPIService : IndoeNaviAPIService) {}
 
   ngOnInit(): void {
     this.charts = [
@@ -26,36 +24,28 @@ export class StatisticComponent implements OnInit  {
     ];
 
     // Active Users
-    this.statisticHandler.loadActiveUsers().subscribe((data: ActiveUser[]) => {
-      next:
-        data.forEach(a => {
-          (<BlockChart>this.charts[2]).values.push({label: (new Date(a.date)).toLocaleDateString(), value: a.count})
-        });
-
+    this.indoeNaviAPIService.getActiveUsers().subscribe((data: DateValue[]) => {
+      data.forEach(a => {
+        (<BlockChart>this.charts[2]).addDateValue(a);
+      });
     });
     // Path sessions
-    this.statisticHandler.loadPathSessions().subscribe((data: PathSession[]) => {
-      next:
-        data.forEach(ps => {
-          (<BlockChart>this.charts[0]).values.push({label: (new Date(ps.date)).toLocaleDateString(), value: ps.count})
-        });
-
+    this.indoeNaviAPIService.getPathSessions().subscribe((data: DateValue[]) => {
+      data.forEach(ps => {
+        (<BlockChart>this.charts[0]).addDateValue(ps);
+      });
     });
     // Destination visits
-    this.statisticHandler.loadDestVisits().subscribe((data: DestinationVisit[]) => {
-      next:
-        data.forEach(dv => {
-          (<ListChart>this.charts[3]).table.rows.push({values: [dv.name, dv.count.toString()]})
-        });
-
+    this.indoeNaviAPIService.getDestinationVisits().subscribe((data: NameValue[]) => {
+      data.forEach(dv => {
+        (<ListChart>this.charts[3]).addNameValue(dv);
+      });
     });
     // Used sensors
-    this.statisticHandler.loadUsedSensors().subscribe((data: UsedSensor[]) => {
-      next:
-        data.forEach(us => {
-          (<ListChart>this.charts[1]).table.rows.push({values: [us.name, us.count.toString()]})
-        });
-
+    this.indoeNaviAPIService.getUsedSensors().subscribe((data: NameValue[]) => {
+      data.forEach(us => {
+        (<ListChart>this.charts[1]).addNameValue(us);
+      });
     });
   }
 }

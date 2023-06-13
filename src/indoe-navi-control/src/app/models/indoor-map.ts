@@ -2,12 +2,12 @@ import { RouteNode } from "./route-node";
 import { SPE } from "./spe";
 
 export class IndoorMap{
-  id? : any;
-  area : string;
-  imageData : string;
-  routeNodes : RouteNode[] = [];
-  spes : SPE[] = [];
-  meterPerPixel : number = 1;
+  public id? : any;
+  public area : string;
+  public imageData : string;
+  public routeNodes : RouteNode[] = [];
+  public spes : SPE[] = [];
+  public meterPerPixel : number = 1;
 
   public constructor(id : any, area : string, imageData : string, routeNodes : RouteNode[], spes : SPE[], meterPerPixel : number){
     this.id = id;
@@ -18,9 +18,9 @@ export class IndoorMap{
     this.meterPerPixel = meterPerPixel;
   }
 
-  public getSPE(x : number, y : number) : SPE | null {
+  public findSPEByPosition(x : number, y : number) : SPE | null {
     for (let i = 0; i < this.spes.length; i++){
-      if (this.distanceToSPE(this.spes[i], x, y) < 32){
+      if (this.calculateDistanceToSPE(this.spes[i], x, y) < 32){
         return this.spes[i];
       }
     }
@@ -36,7 +36,7 @@ export class IndoorMap{
     }
   }
 
-  public distanceToSPE(spe : SPE, x : number, y : number) : number{
+  public calculateDistanceToSPE(spe : SPE, x : number, y : number) : number{
     return Math.sqrt(Math.abs((x - spe.x)**2 + (y - spe.y)**2));
   }
 }

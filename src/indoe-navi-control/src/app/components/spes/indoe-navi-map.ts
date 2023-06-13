@@ -2,8 +2,6 @@ import { IndoorMap } from "src/app/models/indoor-map";
 import { SPE } from "src/app/models/spe";
 import { Camrea } from "./camera";
 
-
-
 export class IndoeNaviMap{
   public speNodeHovered : SPE | null = null;
   public speNodeSelected : SPE | null = null;
@@ -40,11 +38,11 @@ export class IndoeNaviMap{
     this.camera.startCameraDrag(event.offsetX, event.offsetY);
 
     if (event.buttons == 2){
-      this.indoorMap.spes.push(new SPE(this.camera.xPosStart, this.camera.yPosStart, "Ny SPE", "00:00:00:00"));
+      this.indoorMap.spes.push({x: this.camera.xPosStart, y: this.camera.yPosStart, name: "Ny SPE", macAdress: "00:00:00:00"});
       this.canvas.dispatchEvent(this.mapUpdatedEvent);
     }
 
-    this.speNodeHovered = this.indoorMap.getSPE(event.offsetX - this.camera.xPos, event.offsetY - this.camera.yPos);
+    this.speNodeHovered = this.indoorMap.findSPEByPosition(event.offsetX - this.camera.xPos, event.offsetY - this.camera.yPos);
 
     if (event.button == 0){
       this.speNodeSelected = this.speNodeHovered;
@@ -68,7 +66,7 @@ export class IndoeNaviMap{
       }
     }
 
-    this.speNodeHovered = this.indoorMap.getSPE(event.offsetX - this.camera.xPos, event.offsetY - this.camera.yPos);
+    this.speNodeHovered = this.indoorMap.findSPEByPosition(event.offsetX - this.camera.xPos, event.offsetY - this.camera.yPos);
   }
 
   private onKeyDown(event : KeyboardEvent){
