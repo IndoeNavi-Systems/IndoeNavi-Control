@@ -1,4 +1,4 @@
-export class Camrea{
+export class Camera{
   public xPos : number = 0;
   public yPos : number = 0;
   public xPosStart : number = 0;

@@ -1,6 +1,6 @@
 import { IndoorMap } from "src/app/models/indoor-map";
 import { SPE } from "src/app/models/spe";
-import { Camrea } from "./camera";
+import { Camera } from "./camera";
 
 export class IndoeNaviMap{
   public speNodeHovered : SPE | null = null;
@@ -8,7 +8,7 @@ export class IndoeNaviMap{
   private mapUpdatedEvent = new CustomEvent("mapupdated", {detail: 3});
   private canvas : HTMLCanvasElement;
   private ctx : CanvasRenderingContext2D;
-  private camera = new Camrea();
+  private camera = new Camera();
   private indoorMap : IndoorMap;
 
   public constructor(canvas : HTMLCanvasElement, indoorMap : IndoorMap){
