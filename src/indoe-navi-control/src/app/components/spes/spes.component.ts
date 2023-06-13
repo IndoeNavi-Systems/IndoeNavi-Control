@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { delay } from 'rxjs';
 import { IndoeNaviMap } from 'src/app/components/spes/indoe-navi-map';
 import { IndoorMap } from 'src/app/models/indoor-map';
 import { IndoeNaviAPIService } from 'src/app/services/indoe-navi-api.service';
@@ -10,23 +11,23 @@ import { IndoeNaviAPIService } from 'src/app/services/indoe-navi-api.service';
 })
 export class SpesComponent {
   public map : IndoeNaviMap | null = null;
-  public indoorMap : IndoorMap = new IndoorMap("", "", "", [], [], 1);
+  public indoorMap : IndoorMap = new IndoorMap("", "", " ", [], [], 1);
 
   constructor(public indoeNaviAPIService : IndoeNaviAPIService){}
 
   ngAfterViewInit() {
     let self = this;
-    let mapCanvas = <HTMLCanvasElement>document.getElementById("mapCanvas");
 
     this.indoeNaviAPIService.getMap().subscribe((indoorMap: IndoorMap) => {
+      self.indoorMap = new IndoorMap(indoorMap.id, indoorMap.area, indoorMap.imageData, indoorMap.routeNodes, indoorMap.spes, indoorMap.meterPerPixel);
       let mapImage : any = document.getElementById("mapImage");
       mapImage.src = "data:image/png;base64," + indoorMap.imageData;
 
-      self.indoorMap = new IndoorMap(indoorMap.id, indoorMap.area, indoorMap.imageData, indoorMap.routeNodes, indoorMap.spes, indoorMap.meterPerPixel);
+      let mapCanvas = <HTMLCanvasElement>document.getElementById("mapCanvas");
+      mapCanvas.addEventListener("mapupdated",  (CustomEvent) => { self.saveData(); }, false);
       self.map = new IndoeNaviMap(mapCanvas, self.indoorMap);
       self.map.initialize();
     });
-    mapCanvas.addEventListener("mapupdated",  (CustomEvent) => { self.saveData(); }, false);
   }
 
   onDeleteSpe(){

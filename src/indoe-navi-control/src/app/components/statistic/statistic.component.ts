@@ -18,7 +18,7 @@ export class StatisticComponent implements OnInit  {
   ngOnInit(): void {
     this.charts = [
       new BlockChart("Vejfindings sessioner", []),
-      new ListChart("Mindst bruge sensorer", { headers: [ "id", "Sidst brugt" ], rows: [] }),
+      new ListChart("Mindst brugte sensorer", { headers: [ "Navn", "Sidst brugt" ], rows: [] }),
       new BlockChart("Aktive brugere", []),
       new ListChart("Mest søgte destinationer", { headers: [ "Navn", "Antal søgt" ], rows: [] }),
     ];

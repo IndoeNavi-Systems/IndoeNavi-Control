@@ -1,5 +1,12 @@
 <div class="row gx-0 gy-0">
-    <div class="vh-100" [ngClass]="{'col-9':map?.speNodeSelected != null, 'col-12':!map?.speNodeSelected == null}" id="speDiv">
+  <div *ngIf="indoorMap.imageData == ''"  class="jumbotron vertical-center">
+    <div class="container">
+      <h1 class="text-center"><b>Kortet mangler</b></h1>
+      <h3 class="text-center">Kortet kan importers inde i kort indstillingerne.</h3>
+    </div>
+  </div>
+
+    <div *ngIf="indoorMap.imageData != ''" class="vh-100" [ngClass]="{'col-9':map?.speNodeSelected != null, 'col-12':!map?.speNodeSelected == null}" id="speDiv">
       <canvas id="mapCanvas"></canvas>
       <img hidden="true" id="mapImage" />
       <img hidden="true" id="speImage" src="../../../assets/SPE.png" />
@@ -26,7 +33,7 @@
                 </div>
 
                 <div class="d-grid gap-2 mt-4">
-                    <button class="btn btn-lg btn-primary" type="button" (click)="onDeleteSpe()">Slet</button>
+                    <button class="btn btn-lg btn-danger" type="button" (click)="onDeleteSpe()">Slet</button>
                 </div>
             </div>
         </nav>
