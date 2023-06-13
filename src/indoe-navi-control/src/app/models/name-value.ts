@@ -1,4 +1,4 @@
-export interface DestinationVisit{
+export interface NameValue{
     id? : any,
     name : string,
     count : number,

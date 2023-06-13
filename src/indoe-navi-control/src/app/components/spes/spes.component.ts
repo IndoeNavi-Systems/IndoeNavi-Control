@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IndoeNaviMap } from 'src/app/map/indoe-navi-map';
+import { IndoeNaviMap } from 'src/app/components/spes/indoe-navi-map';
 import { IndoorMap } from 'src/app/models/indoor-map';
 import { IndoeNaviAPIService } from 'src/app/services/indoe-navi-api.service';
 
