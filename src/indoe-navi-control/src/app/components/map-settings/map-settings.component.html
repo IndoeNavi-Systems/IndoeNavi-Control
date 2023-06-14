@@ -1,7 +1,12 @@
 <div class="row g-0">
   <div class="col-9">
-    <img src="data:image/png;base64,{{imageData}}" class="img-fluid" id="mapImage" >
-
+    <img *ngIf="imageData != ''" src="data:image/png;base64,{{imageData}}" class="img-fluid" id="mapImage" >
+    <div *ngIf="imageData == ''"  class="jumbotron vertical-center">
+      <div class="container">
+        <h1 class="text-center"><b>Kortet mangler</b></h1>
+        <h3 class="text-center">Kortet kan importers over i højre side.</h3>
+      </div>
+    </div>
   </div>
   <div class="col-3">
       <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
